@@ -12,11 +12,11 @@ The task of this project is to summarize one real-world business report that can
 
 ## 1. Describe The Dataset
 
-The provided dataset includes information such as customer information, film information, store information, etc.
-
-We can dig into the psql command line tool to see exactly what we are working with. Navigate to the bin directory of your postgresql installation and run the psql command. Since I am on a mac, I have installed the pgadmin and postgresql bundle. They have a provided binary to launch the binary directly. We will run some commands to get more information about our database. First we will login to the postgresql sever with the provided tool. 
+We can dig into the SQL SHELL (psql) command line utility that comes bundled with the postgresql13 installation for [Mac](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) to see exactly what we are working with. This should be similar for any Windows or Linux install. 
 
 ![](images/psql.png)
+
+# Let's log in. 
 
 ```bash
 Server [localhost]: 
@@ -29,7 +29,50 @@ psql (13.5)
 Type "help" for help.
 
 postgres=# 
+``` 
+# Now let's run some commands to get more info
+
+```bash
+postgres=# \l
+                             List of databases
+   Name    |  Owner   | Encoding | Collate | Ctype |   Access privileges   
+-----------+----------+----------+---------+-------+-----------------------
+ dvdrental | postgres | UTF8     | C       | C     | 
+ postgres  | postgres | UTF8     | C       | C     | 
+ template0 | postgres | UTF8     | C       | C     | =c/postgres          +
+           |          |          |         |       | postgres=CTc/postgres
+ template1 | postgres | UTF8     | C       | C     | =c/postgres          +
+           |          |          |         |       | postgres=CTc/postgres
+(4 rows)
+
+postgres=# \c dvdrental
+You are now connected to database "dvdrental" as user "postgres".
+dvdrental=# \dt
+             List of relations
+ Schema |     Name      | Type  |  Owner   
+--------+---------------+-------+----------
+ public | actor         | table | postgres
+ public | address       | table | postgres
+ public | category      | table | postgres
+ public | city          | table | postgres
+ public | country       | table | postgres
+ public | customer      | table | postgres
+ public | film          | table | postgres
+ public | film_actor    | table | postgres
+ public | film_category | table | postgres
+ public | inventory     | table | postgres
+ public | language      | table | postgres
+ public | payment       | table | postgres
+ public | rental        | table | postgres
+ public | staff         | table | postgres
+ public | store         | table | postgres
+(15 rows)
+
+dvdrental=# 
+
 ```
+
+As we can see the provided dataset includes customer information, film information, store information, etc. below is an ERD diagram with more detailed information. 
 
 # ERD Diagram
 
