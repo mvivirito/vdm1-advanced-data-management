@@ -13,7 +13,7 @@ The goal of this project is to export data from our primary database into a new 
 The real-world business question that we want to answer with our reports is what are our best performing titles every month. The detailed aggregate section will contain all rentals placed with their rental date and rental price. Through this data we will be able generate a monthly top 10 with sum totals for each film. 
 
 
-## 1. Describe The Dataset
+## Describe The Dataset
 
 We can dig into the SQL SHELL (psql) command line utility that comes bundled with the postgresql13 installation for [Mac](https://www.enterprisedb.com/downloads/postgres-postgresql-downloads) to see exactly what we are working with. This should be similar for any Windows or Linux install. 
 
