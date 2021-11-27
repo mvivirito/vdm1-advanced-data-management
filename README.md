@@ -80,5 +80,9 @@ Here is a detailed view of the dataset
 
 ![](images/erd.png)
 
+# Real World Report
+
+Now that we have enough information about our data, I have decided to create a report of the top 10 performing rental inventory. To accomplish this report I will need to combine data from the Payments, Inventory, Rental, and Film tables into a new table called top_performers. 
+
 
 
