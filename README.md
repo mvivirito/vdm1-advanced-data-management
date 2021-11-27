@@ -8,6 +8,6 @@ I am currently working on my Bachelors in Computer Science at WGU and this proje
 
 ## DVD Database
 
-For this project we are given a DVD rental companies' dataset. This includes information such as customers, films, stores
+For this project we are given a DVD rental companies' dataset. This includes information such as customers, films, stores. Below is the Enitity Relationship Diagram of the dataset we are working with. 
 
 ![](images/erd.png)
