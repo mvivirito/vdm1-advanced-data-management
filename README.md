@@ -82,11 +82,27 @@ Here is a detailed view of the dataset
 
 # Real World Report
 
-Now that we have enough information about our data, I have decided to create a report of the top 10 performing rental inventory. To accomplish this report I will need to combine data from the Payments, Inventory, Rental, and Film tables into a new table called top_performers. 
+Now that we have enough information about our data, I have decided to create a report of the bottom and top 10 performing rentals of all time. To accomplish this report, I will need to combine data from the Payments, Inventory, Rental, and Film tables into a new table called total_sum_rental. 
 
 Let's start by creating a new table to hold our data.
 
 ```bash
 
+```
+
+
+Now we will create our query to sum up the total rentals for each of our films. 
+
+```sql
+SELECT 
+	film.title, sum(payment.amount) as total_rentals
+FROM 
+	rental
+INNER JOIN inventory ON rental.inventory_id = inventory.inventory_id
+INNER JOIN film ON film.film_id  = inventory.film_id
+INNER JOIN payment ON rental.rental_id = payment.rental_id
+group by film.film_id
+order by total_rentals desc
+limit 10;
 ```
 
