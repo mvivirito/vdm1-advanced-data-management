@@ -72,7 +72,7 @@ dvdrental=#
 
 ```
 
-As we can see the provided dataset includes customer information, film information, store information, etc. below is an ERD diagram with more detailed information. 
+As we can see the provided dataset includes customer information, film information, store information, etc. below is an ERD diagram with more detailed information which can be generated automatically from PgAdmin4. 
 
 # ERD Diagram
 
@@ -84,5 +84,9 @@ Here is a detailed view of the dataset
 
 Now that we have enough information about our data, I have decided to create a report of the top 10 performing rental inventory. To accomplish this report I will need to combine data from the Payments, Inventory, Rental, and Film tables into a new table called top_performers. 
 
+Let's start by creating a new table to hold our data.
 
+```bash
+
+```
 
