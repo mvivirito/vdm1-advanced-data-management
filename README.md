@@ -1,5 +1,4 @@
 # vdm1-advanced-data-management
----
 
 ### Introduction
 
