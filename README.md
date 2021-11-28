@@ -147,12 +147,6 @@ Next we can populate the all_rentls table
 
 ```
 
-
-
-
-
-
-```
 Now we will create our query to sum up the total rentals for each of our films. 
 
 ```sql
