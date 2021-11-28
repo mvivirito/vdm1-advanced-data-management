@@ -1,4 +1,4 @@
-drop table top_rentals;
+--drop table top_rentals;
 
 CREATE TABLE IF NOT EXISTS top_rentals (
    title varchar(255),
@@ -6,8 +6,6 @@ CREATE TABLE IF NOT EXISTS top_rentals (
    totals varchar(10)
 );
 
-call rebuild_summary();
+--CALL rebuild_summary();
 
 select * from top_rentals;
-
-

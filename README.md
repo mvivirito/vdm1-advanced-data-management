@@ -87,14 +87,29 @@ Here is a detailed view of the dataset
 
 Now that we have enough information about our data, I have decided to create a report of the bottom and top 10 performing rentals of all time. To accomplish this report, I will need to combine data from the Payments, Inventory, Rental, and Film tables into a new table called total_sum_rental. 
 
-Let's start by creating a new table to hold our data.
+Let's start by creating the new detailed and summary tables
 
-```bash
+```sql
+CREATE TABLE IF NOT EXISTS all_rentals (
+   title varchar(255),
+   family_friendly varchar(3),
+   rental_rate numeric(4,2),
+   rental_date TIMESTAMP
+);
+
+
+CREATE TABLE IF NOT EXISTS top_rentals (
+   title varchar(255),
+   family_friendly varchar(3),
+   totals varchar(10)
+);
 
 ```
 
 
 Now we will create our query to sum up the total rentals for each of our films. 
+
+
 
 ```sql
 SELECT 
