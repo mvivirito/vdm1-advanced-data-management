@@ -8,9 +8,9 @@ END;
 $$
 LANGUAGE 'plpgsql';
 
---CREATE TRIGGER all_rentals_trigger
---  AFTER INSERT
---  ON "all_rentals"
---  FOR EACH STATEMENT
---  EXECUTE PROCEDURE all_rentals_insert_trigger_fnc();
+CREATE TRIGGER all_rentals_trigger
+  AFTER INSERT
+  ON "all_rentals"
+  FOR EACH ROW
+  EXECUTE PROCEDURE all_rentals_insert_trigger_fnc();
  

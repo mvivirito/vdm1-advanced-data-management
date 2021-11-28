@@ -7,4 +7,5 @@ CREATE TABLE IF NOT EXISTS all_rentals (
    rental_date TIMESTAMP
 );
 
+select * from all_rentals;
 

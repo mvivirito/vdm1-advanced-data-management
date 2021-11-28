@@ -1,5 +1,5 @@
 -- This procedure should be run once per week and is set to automatically run with pgagent.
-CREATE PROCEDURE rebuild_all()
+CREATE OR REPLACE PROCEDURE rebuild_all()
 LANGUAGE SQL
 AS $$
 
