@@ -85,18 +85,19 @@ Here is a detailed view of the dataset
 
 # Real World Report
 
-Now that we have enough information about our data, I have decided to create a report of the bottom and top 10 performing rentals of all time. To accomplish this report, I will need to combine data from the Payments, Inventory, Rental, and Film tables into a new table called total_sum_rental. 
+Now that we have enough information about our data, I have decided to create a summary report of the top 10 performing rentals of the month and if they are family friendly or not. This will be useful to the company, so that they can know what kind of inventory to keep in stock. To accomplish this report, I will need to combine data from the Payments, Inventory, Rental, and Film tables into a new table called all_rentals, this will be our detailed table. I will also createa another table called top_rentals which will take data from the detailed table and create our summary report. 
 
-Let's start by creating the new detailed and summary tables
+### Table Creation
+
+Let's start by creating the new detailed and summary tables. The fields included are as shown below. 
 
 ```sql
 CREATE TABLE IF NOT EXISTS all_rentals (
    title varchar(255),
-   family_friendly varchar(3),
+   rating mpaa_rating,
    rental_rate numeric(4,2),
    rental_date TIMESTAMP
 );
-
 
 CREATE TABLE IF NOT EXISTS top_rentals (
    title varchar(255),
@@ -104,12 +105,53 @@ CREATE TABLE IF NOT EXISTS top_rentals (
    totals varchar(10)
 );
 
+### Transformation
+
+As you can see we have a family_friendly field in our top_rentals table. This will be populated using a function to transfrom the ratings into a simple Yes or No family friendly value. Here is the plpgsql function below.
+
+```sql
+Create or replace function family_friendly (rating mpaa_rating)
+returns varchar
+Language plpgsql
+as
+$$
+Declare
+ friendly varchar;
+	Begin
+	
+	 if rating = 'R' then
+		 friendly := 'No';
+	 elseif rating = 'NC-17' then
+		 friendly := 'No';
+	 else 
+		 friendly := 'Yes';
+	 end if;
+	
+	return friendly;
+End;
+$$;
+
 ```
 
 
+### Populate all_rentals table
+
+
+Next we can populate the all_rentls table
+
+```sql
+
+
+
+```
+
+
+
+
+
+
+```
 Now we will create our query to sum up the total rentals for each of our films. 
-
-
 
 ```sql
 SELECT 
