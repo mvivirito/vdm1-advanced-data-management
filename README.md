@@ -132,7 +132,7 @@ order by rental_date desc;
 
 To confirm that our data is correct I have compared the extraction query for one of the films. 
 ![](images/confirm1.png)
-![](images/condirm2.png)
+![](images/confirm2.png)
 
 ### Transformation
 
