@@ -2,7 +2,7 @@
 
 ### Introduction
 
-I am currently working on my Bachelors Degree in Computer Science at [WGU](https://www.wgu.edu/online-it-degrees/bachelors-programs.html) and this project is for the Advanced Data Managemnt coursei D191. 
+I am currently working on my Bachelors Degree in Computer Science at [WGU](https://www.wgu.edu/online-it-degrees/bachelors-programs.html) and this project is for the Advanced Data Managemnt course D191. 
 
 ## DVD Database
 
@@ -187,6 +187,8 @@ $$;
 
 ### rebuild_all_procedure
 
+This stored procedure can refresh the data in both the detailed and summary tables. It will first clear both of the tables and populate them with fresh data. This procedure should be executed once per week on Monday's to ensure data freshness. We can use a tool like pgagent to schedule a recurring job for this functionality. 
+
 ```sql
 -- This procedure should be run once per week and is set to automatically run with pgagent.
 CREATE PROCEDURE rebuild_all()
@@ -202,18 +204,30 @@ CALL rebuild_summary();
 $$;
 ```
 
-Now we will create our query to sum up the total rentals for each of our films. 
+Here is an example of how pgagent can be configured if installed as an addon on pgadmin 4.
+![](images/pga1.png)
+![](images/pga2.png)
+![](images/pga3.png)
+
+
+### Creating a trigger on detailed table
+
+We needed a way to automaitcally update the summary table if new data was added to the detailed table. So I created a trigger to handle this. 
 
 ```sql
-SELECT 
-	film.title, sum(payment.amount) as total_rentals
-FROM 
-	rental
-INNER JOIN inventory ON rental.inventory_id = inventory.inventory_id
-INNER JOIN film ON film.film_id  = inventory.film_id
-INNER JOIN payment ON rental.rental_id = payment.rental_id
-group by film.film_id
-order by total_rentals desc
-limit 10;
-```
+CREATE OR REPLACE FUNCTION all_rentals_insert_trigger_fnc()
+  RETURNS trigger AS
+$$
+BEGIN
+    CALL rebuild_summary();
+RETURN NULL;
+END;
+$$
+LANGUAGE 'plpgsql';
 
+CREATE TRIGGER all_rentals_trigger
+  AFTER INSERT
+  ON "all_rentals"
+  FOR EACH STATEMENT
+  EXECUTE PROCEDURE all_rentals_insert_trigger_fnc();
+ ```
