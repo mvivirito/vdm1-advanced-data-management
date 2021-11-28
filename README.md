@@ -130,7 +130,7 @@ INNER JOIN payment ON rental.rental_id = payment.rental_id
 order by rental_date desc;
 ```
 
-To confirm that our data is correct I have selected the joined data that we extracted for our detailed summary and compared that to the original unextracted data. We can in fact see that "Freaky Pocus" reated R film was rented out on '2005-07-07 17:54:37'.
+To confirm that our data is correct I have looked up one film from the joined data that we extracted for our detailed summary and compared that to the original unextracted data. We can in fact see that "Freaky Pocus" reated R film was rented out on '2005-07-07 17:54:37'.
 
 ![](images/confirm1.png)
 ![](images/confirm2.png)
