@@ -10,3 +10,4 @@ group by film.film_id
 order by total_rentals desc
 limit 10;
 
+
