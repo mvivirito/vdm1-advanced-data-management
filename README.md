@@ -105,6 +105,8 @@ CREATE TABLE IF NOT EXISTS top_rentals (
    totals varchar(10)
 );
 
+```
+
 ### Transformation
 
 As you can see we have a family_friendly field in our top_rentals table. This will be populated using a function to transfrom the ratings into a simple Yes or No family friendly value. Here is the plpgsql function below.
