@@ -136,15 +136,70 @@ $$;
 ```
 
 
-### Populate all_rentals table
+## Populate detailed and summary tables
 
 
-Next we can populate the all_rentls table
+I have created some procedures to populate the all_rentals table from the main dvdrental database and another procedure to populate the summary table from the all_rentals table. I have even created another procedure to refresh both detailed and summary at the same time. Here they are below
+
+### rebuild_detailed_procedure
 
 ```sql
+CREATE OR REPLACE PROCEDURE rebuild_detailed()
+LANGUAGE SQL
+AS $$
 
+DELETE FROM all_rentals;
 
+INSERT INTO all_rentals(title,rating, rental_rate, rental_date)
+SELECT
+	film.title, film.rating, rental_rate, rental.rental_date
+FROM 
+	rental
+INNER JOIN inventory ON rental.inventory_id = inventory.inventory_id
+INNER JOIN film ON film.film_id  = inventory.film_id
+INNER JOIN payment ON rental.rental_id = payment.rental_id
+order by rental_date desc;
 
+$$;
+```
+### rebuild_summary_procedure
+
+```sql
+CREATE OR REPLACE PROCEDURE rebuild_summary()
+LANGUAGE SQL
+AS $$
+
+DELETE FROM top_rentals;
+
+INSERT INTO top_rentals(title,family_friendly, totals)
+SELECT 
+	title, family_friendly(rating), CAST(SUM(rental_rate) AS money) AS totals
+FROM 
+	all_rentals
+WHERE rental_date::TIMESTAMP::DATE BETWEEN '2005-07-01' AND '2005-08-01'
+GROUP BY title,family_friendly
+ORDER BY totals DESC
+LIMIT 10;
+
+$$;
+
+```
+
+### rebuild_all_procedure
+
+```sql
+-- This procedure should be run once per week and is set to automatically run with pgagent.
+CREATE PROCEDURE rebuild_all()
+LANGUAGE SQL
+AS $$
+
+DELETE FROM all_rentals;
+DELETE FROM top_rentals;
+
+CALL rebuild_detailed();
+CALL rebuild_summary();
+
+$$;
 ```
 
 Now we will create our query to sum up the total rentals for each of our films. 
