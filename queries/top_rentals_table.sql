@@ -6,6 +6,4 @@ CREATE TABLE IF NOT EXISTS top_rentals (
    totals varchar(10)
 );
 
---CALL rebuild_summary();
-
 select * from top_rentals;
